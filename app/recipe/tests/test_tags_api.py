@@ -16,9 +16,9 @@ from recipe.serializers import TagSerializer
 TAGS_URL = reverse('recipe:tag-list')
 
 
-def create_user(email='user@example.com', password='Test@Pass123'):
-    """Create and return user."""
-    return get_user_model().objects.create_user(email, password)
+def create_user(email='user@example.com', password='testpass123'):
+    """Create and return a user."""
+    return get_user_model().objects.create_user(email=email, password=password)
 
 
 class PublicTagsApiTests(TestCase):
@@ -44,8 +44,8 @@ class PrivateTagsApiTests(TestCase):
 
     def test_retrieve_tags(self):
         """Test retrieving a list of tags."""
-        Tag.objects.create(user=self.user, name="Vegan")
-        Tag.objects.create(user=self.user, name="Dessert")
+        Tag.objects.create(user=self.user, name='Vegan')
+        Tag.objects.create(user=self.user, name='Dessert')
 
         res = self.client.get(TAGS_URL)
 
